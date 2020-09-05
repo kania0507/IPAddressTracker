@@ -3,7 +3,6 @@ main {
     height: 60vh;
     text-align: center;
 
-
     .results {
         background-color: #FFF;
         width: 70vw;
@@ -13,8 +12,7 @@ main {
         padding: 2%;
         border: 1px solid $darkGray;
         border-radius: 10px;
-        
-
+        z-index: 1;
         
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -38,12 +36,13 @@ main {
             -webkit-flex-direction: column;
             -ms-flex-direction: column;
             flex-direction: column;
-
+            margin-top: -20vh;
             
         }
     }
 
 .results-col {
+    z-index: 1;
         -webkit-order: 0;
         -ms-flex-order: 0;
         order: 0;
@@ -83,11 +82,17 @@ main {
     }
 
     #mapid {
-         height: 580px; 
-       
+         height: 45vh; 
+         min-height: 350px;
+         position: relative;
+         margin-top: -16vh;
+         z-index: -1;
+
+        @media screen and (max-width: 375px) {
+            & {
+                margin-top: -18vh;
+            }
+        }
     }
 }
 
-footer {
-    min-height: 2vh;
-}

@@ -50,9 +50,10 @@
     </div>
     
     
-    <div id="mapid"></div>
+    
 
 <script type='text/javascript'>  
+
 $(document).on('submit',function(){
   
   event.preventDefault();
@@ -79,25 +80,19 @@ $(document).on('submit',function(){
  
      var xy =  response['location']['lat'] +','+ response['location']['lng'];
 
-     mymap = L.map('mapid');
+     mymap = L.map('mapid').setView([ response['location']['lat'] ,  response['location']['lng'] ], 13 );
 
-     window.setTimeout(() => {
-            //mymap = L.map('mapid').setView([ response['location']['lat'] ,  response['location']['lng'] ], 13 );
-            mymap.setView([ response['location']['lat'] ,  response['location']['lng'] ], 13 );
-      }, 500);
-      
   }); 
  
 }); 
  
      </script>
-    
+    <div id="mapid"></div>
   </main>
   <footer>
-    <div class="attribution">
       Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
       Coded by <a href="https://github.com/kania0507">AKC</a>.
-    </div>
+    
   </footer>
   </div>
 </body>
