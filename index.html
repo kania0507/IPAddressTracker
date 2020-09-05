@@ -7,52 +7,98 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
   <link rel="stylesheet" href="./css/main.css" />
   <link rel="stylesheet" href="./css/leaflet.css" />
-  <script src="/js/leaflet.js" ></script>
-  <script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="./js/leaflet.js" ></script>
+  <script src="./js/main.js" ></script>
+  
   <title>Frontend Mentor | IP Address Tracker</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-    #mapid { height: 180px; }
-  </style>
+  
 </head>
 <body>
-<header>
-  <h1>IP Address Tracker</h1>
+  <div class="page-wrapper">
+  <header>
+    <h1>IP Address Tracker</h1>
 
-  <form>
-    <input type="text" placeholder="Search for any IP address or domain" /><input type="submit" value=">" />
-  </form>
-</header>
-<main>
-  <div class="results">
-    <div class="results-col">IP Address</div>
-    <div class="results-col">Location</div>
-    <div class="results-col">Timezone</div>
-    <div class="results-col">UTC <!-- add offset value dynamically using the API -->
-    ISP</div>
-  </div>
+    <form name="form1" id="form1" method="POST" >
+      <input type="text" placeholder="Search for any IP address or domain" id="ipval" name="ipval" />
+      <input type="submit" value=">"   />
+    </form>
+  </header>
+  <main>
+
+    <div class="results">
+      
+        <div class="results-col">
+          <h2>IP Address</h2>
+          <p id="ip"></p>
+        </div>
+        <div class="results-col">
+          <h2>Location</h2>
+          <p id="location"></p>
+        </div>
+        <div class="results-col">
+          <h2>Timezone</h2>
+          <p id="timezone"></p>
+        </div>
+        <div class="results-col">
+          <h2>UTC 
+        ISP</h2>
+        <p id="isp"></p>
+      </div>
+      
+    </div>
+    
+    
+    <div id="mapid"></div>
+
+<script type='text/javascript'>  
+$(document).on('submit',function(){
   
+  event.preventDefault();
   
+  $("#ipval").empty();
+  $("p#location").val(' ');
+  $("p#timezone").val(' ');
+  $("p#ip").val(' ');
+  $("p#isp").val(' ');
+  
+  var mymap = null;
 
-  <div id="mapid"></div>
-  <script type='text/javascript'>
+  var x = $("#ipval").val();
+ 
+ //console.log(x);
+ 
+ $.when( findGeo( x  ) ).done( function(response) {
+     //console.log(response  );
+     
+     $("p#location").html( response['location']['city']+', '+response['location']['region'] );
+     $("p#timezone").html( 'UTC'+response['location']['timezone'] );
+     $("#ip").html( response['ip'] );
+     $("#isp").html( response['isp'] ); 
+ 
+     var xy =  response['location']['lat'] +','+ response['location']['lng'];
 
-    var map = new L.Map('map', {center: new L.LatLng(51.51, -0.11), zoom: 9});
+     mymap = L.map('mapid');
 
-    var googleLayer = new L.Google('ROADMAP');
-
-    map.addLayer(googleLayer);
-
-  </script>
-</main>
-<footer>
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
+     window.setTimeout(() => {
+            //mymap = L.map('mapid').setView([ response['location']['lat'] ,  response['location']['lng'] ], 13 );
+            mymap.setView([ response['location']['lat'] ,  response['location']['lng'] ], 13 );
+      }, 500);
+      
+  }); 
+ 
+}); 
+ 
+     </script>
+    
+  </main>
+  <footer>
+    <div class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+      Coded by <a href="https://github.com/kania0507">AKC</a>.
+    </div>
+  </footer>
   </div>
-</footer>
 </body>
 </html>

@@ -10,16 +10,31 @@
 }
 
 body{
-	
+	width: 100%;
 	font-size: 16px;
 	font-family: 'Rubik', sans-serif;
 	font-weight: 400;
 	line-height: 1;
+	text-align: center;
 	
 }
-header {
-	min-height: 30vh;
-	background-image: url('../images/pattern-bg.png');
+.page-wrapper {
+	position: relative;
+	max-width: 1440px;
+	margin: 0 auto;
+	text-align: center;
+	top: 5vh;
+
+	@media screen and (max-width: 375px) {
+		&{
+			top: 0;
+		}
+	}
+
+	header {
+		width: 100%;
+		min-height: 35vh;
+		background-image: url('../images/pattern-bg.png');
 		background-position: center center;
 		-ms-background-size: cover;
 		-o-background-size: cover;
@@ -31,33 +46,74 @@ header {
 
 		h1 {
 			color: #FFF;
-			padding: 1%;
+			padding: 3%;
+			font-size: 2em;
+			font-weight: 500;
 		}
-}
 
-form {
-	margin: 0;
-	
 
-	input {
-		padding: 1%;
-		margin: 0; 
-		display: inline-block;
-		font-size: 18px;
-		border: 1px solid $veryDarkGray;
-
-		&[type=text] {
+		form {
+			margin: 0 auto; 
+			width: 90%;
 			
-			border-radius: 10px 0 0 10px; 
-			
-			width: 30%;
-			color: $darkGray;
-		}
-		&[type=submit] {
-			border-radius: 0 10px 10px 0; 
-			background-color: $veryDarkGray;
-			color: #FFF;
-		}
+			@media screen and (max-width: 375px) {
+				& {
+					width: 90%;
+				}
+			}
+		
+			input {
+				padding: 1%;
+				margin: 0; 
+				display: inline-block;
+				font-size: 18px;
+				
+				border: 1px solid $veryDarkGray;
+				&:hover {
+					cursor: pointer;
+				}
+
+				@media screen and (max-width: 375px) {
+					& {
+						padding: 2%;
+					}
+				}
+		
+				&[type=text] {
+					text-align: left;
+					border-radius: 10px 0 0 10px; 
+					
+					width: 30vw;
+					color: $veryDarkGray;
+
+					&::placeholder {
+						color: $darkGray;
+					}
+					
+
+					@media screen and (max-width: 375px) {
+						& {
+							width: 80%;
+						}
+					}
+					
+				}
+				&[type=submit] {
+					border-radius: 0 10px 10px 0; 
+					background-color: $veryDarkGray;
+					color: #FFF;
+					width: 5vw;
+
+					@media screen and (max-width: 375px) {
+						& {
+							width: 10%;
+						}
+					}
+				}
+			}
+		
+		}	
 	}
+
 
 }
